@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Group Price Text Module
  *
@@ -18,7 +19,7 @@ class GroupPriceText extends Module
         $this->name = 'grouppricetext';
         $this->tab = 'pricing_promotion';
         $this->version = '1.0.0';
-        $this->author = 'Your Name';
+        $this->author = 'die.internauten.ch';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = [
             'min' => '1.7.0.0',
@@ -177,28 +178,61 @@ class GroupPriceText extends Module
 
         // Get current customer
         $context = Context::getContext();
-        
+
         if (!$context->customer || !$context->customer->isLogged()) {
             return '';
         }
 
         // Get configured group ID
         $targetGroupId = (int)Configuration::get('GROUPPRICETEXT_GROUP_ID');
-        
-        // Get customer's groups
-        $customerGroups = $context->customer->getGroups();
 
-        // Check if customer belongs to the target group
-        if (!in_array($targetGroupId, $customerGroups)) {
+        // Check if customer's main (default) group matches target group
+        if ((int)$context->customer->id_default_group !== $targetGroupId) {
             return '';
         }
 
-        // Get the message
-        $message = Configuration::get('GROUPPRICETEXT_MESSAGE');
+        // Check if product has specific price/discount using multiple methods
+        $hasSpecificPrice = false;
+
+        // Method 1: Check reduction_type
+        if (isset($params['product']->reduction_type) && !empty($params['product']->reduction_type)) {
+            $hasSpecificPrice = true;
+        }
+
+        // Method 2: Check reduction value
+        if (isset($params['product']->reduction) && $params['product']->reduction > 0) {
+            $hasSpecificPrice = true;
+        }
+
+        // Method 3: Check specific_prices array
+        if (isset($params['product']->specific_prices) && !empty($params['product']->specific_prices)) {
+            $hasSpecificPrice = true;
+        }
+
+        // Method 4: Check has_discount on product object
+        if (isset($params['product']->product->has_discount) && $params['product']->product->has_discount) {
+            $hasSpecificPrice = true;
+        }
+
+        $regularPrice = null;
+        $message = null;
+
+        // Do not show text if product has specific price
+        if ($hasSpecificPrice) {
+            $productObj = new Product((int)$params['product']->id_product, false, $context->language->id);
+            $taxRate = $productObj->getTaxesRate();
+            $priceIncl = $productObj->price * (1 + ($taxRate / 100));
+            $regularPrice = Tools::displayPrice($priceIncl);
+        } else {
+            // Get the message
+            $message = Configuration::get('GROUPPRICETEXT_MESSAGE');
+        }
 
         // Assign variables to template
         $this->context->smarty->assign([
             'group_message' => $message,
+            'regular_price' => $regularPrice,
+            'debug_info' => null,
         ]);
 
         return $this->display(__FILE__, 'views/templates/hook/displayproductpriceblock.tpl');
