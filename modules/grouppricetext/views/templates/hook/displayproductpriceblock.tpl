@@ -7,7 +7,7 @@
 
 {if isset($regular_price) && $regular_price}
     <br>
-    <strong>Katalogpreis: {$regular_price}</strong>
+    <strong>{l s='Katalogpreis:' mod='grouppricetext'} {$regular_price}</strong>
 {/if}
 
 {if isset($debug_info) && $debug_info}
