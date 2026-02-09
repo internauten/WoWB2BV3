@@ -1,4 +1,4 @@
-name: Build grouppricetext zip
+name: Build grouppricetext zip 2
 
 on:
   push:
