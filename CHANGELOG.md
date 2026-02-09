@@ -12,3 +12,8 @@ Nur einiges bereinigt im Bereich README.md etc.
 ## v1.0.2
 - neues ja
 - altes nein
+
+## v1.0.3
+
+- Neues im yml
+- Auch im md
