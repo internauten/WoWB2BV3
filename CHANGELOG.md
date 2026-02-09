@@ -1,52 +1,27 @@
 # Changelog
 
 ## v0.1.0
+
 - Initial tagged release.
+- no release build
 
 ## v1.0.0
-- Erste Version mit release
 
-## v1.0.1
-Nur einiges bereinigt im Bereich README.md etc.
+PrestaShop Group Price Text Module first version
 
-## v1.0.2
-- neues ja
-- altes nein
-
-## v1.0.3
-
-- Neues im yml
-- Auch im md
-
-## v1.0.4
-
-Dies ist ein Text zu diesem Release.
-
-```bash
-noch etwas code
-auch code
-```
-
-- Hansli ist doof
-- Fritzli ist auch nicht hell
-
-## v1.0.5
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-### Subtitel
 ---
 
-Fliesstext zum Titel
----
+A PrestaShop module that displays custom text on product pages for customers belonging to specific groups.
 
-1. Gugus
-2. Gaga
-    - abc
-    - cde
-3. Suaglatt
+### Features
 
-```bash
-noch etwas code
-auch code
-```
+- Display custom messages on product pages based on customer group membership
+- Displays Text only if there is no reduction for this group
+- Displays the original catalog prise to if there is a reduction
+- Easy configuration via module settings
+- Enable/disable functionality
+- Responsive Bootstrap styling
+- Compatible with PrestaShop 1.7+
+
+See README.md for installation instruction
+
