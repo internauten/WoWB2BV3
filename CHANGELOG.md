@@ -8,3 +8,7 @@
 
 ## v1.0.1
 Nur einiges bereinigt im Bereich README.md etc.
+
+## v1.0.2
+- neues ja
+- altes nein
