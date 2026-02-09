@@ -5,6 +5,8 @@ A PrestaShop module that displays custom text on product pages for customers bel
 ## Features
 
 - Display custom messages on product pages based on customer group membership
+- Displays Text only if there is no reduction for this group
+- Displays the original catalog prise to if there is a reduction
 - Easy configuration via module settings
 - Enable/disable functionality
 - Responsive Bootstrap styling

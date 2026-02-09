@@ -1,1 +1,44 @@
-modules/grouppricetext.zip
+# Prestashop Module .gitignore
+
+# Dependencies
+node_modules/
+vendor/
+composer.lock
+
+# Build artifacts
+dist/
+build/
+*.zip
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Prestashop specific
+config/settings.inc.php
+var/cache/*
+var/logs/*
+!var/cache/.gitkeep
+!var/logs/.gitkeep
+
+# Module specific
+.env
+.env.local
+*.phar
