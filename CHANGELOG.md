@@ -10,3 +10,6 @@ Release sections must use headings like:
 
 ## v0.1.0
 - Initial tagged release.
+
+## v1.0.0
+- Erste Version mit release
