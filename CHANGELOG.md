@@ -17,3 +17,15 @@ Nur einiges bereinigt im Bereich README.md etc.
 
 - Neues im yml
 - Auch im md
+
+## v1.0.4
+
+Dies ist ein Text zu diesem Release.
+
+```bash
+noch etwas code
+auch code
+```
+
+- Hansli ist doof
+- Fritzli ist auch nicht hell

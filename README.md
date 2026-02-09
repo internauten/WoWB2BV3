@@ -37,6 +37,7 @@ How to create a new release that builds the ZIP and attaches it to the GitHub Re
 
     ```md
     ## v1.2.3
+    
     - Short description of the changes.
     ```
 
