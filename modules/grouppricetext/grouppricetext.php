@@ -39,7 +39,6 @@ class GroupPriceText extends Module
         return parent::install()
             && $this->registerHook('displayProductPriceBlock')
             && Configuration::updateValue('GROUPPRICETEXT_GROUP_ID', 1)
-            && Configuration::updateValue('GROUPPRICETEXT_MESSAGE', $this->l('Special pricing for your group!'))
             && Configuration::updateValue('GROUPPRICETEXT_ENABLED', 1);
     }
 
@@ -47,7 +46,6 @@ class GroupPriceText extends Module
     {
         return parent::uninstall()
             && Configuration::deleteByName('GROUPPRICETEXT_GROUP_ID')
-            && Configuration::deleteByName('GROUPPRICETEXT_MESSAGE')
             && Configuration::deleteByName('GROUPPRICETEXT_ENABLED');
     }
 
@@ -57,16 +55,12 @@ class GroupPriceText extends Module
 
         if (Tools::isSubmit('submit' . $this->name)) {
             $groupId = (int)Tools::getValue('GROUPPRICETEXT_GROUP_ID');
-            $message = Tools::getValue('GROUPPRICETEXT_MESSAGE');
             $enabled = (int)Tools::getValue('GROUPPRICETEXT_ENABLED');
 
             if (!$groupId || !Validate::isUnsignedId($groupId)) {
                 $output .= $this->displayError($this->l('Invalid group ID'));
-            } elseif (!$message || !Validate::isGenericName($message)) {
-                $output .= $this->displayError($this->l('Invalid message'));
             } else {
                 Configuration::updateValue('GROUPPRICETEXT_GROUP_ID', $groupId);
-                Configuration::updateValue('GROUPPRICETEXT_MESSAGE', $message);
                 Configuration::updateValue('GROUPPRICETEXT_ENABLED', $enabled);
                 $output .= $this->displayConfirmation($this->l('Settings updated successfully'));
             }
@@ -127,15 +121,6 @@ class GroupPriceText extends Module
                             'name' => 'name'
                         ],
                         'desc' => $this->l('Select the customer group that will see the message')
-                    ],
-                    [
-                        'type' => 'textarea',
-                        'label' => $this->l('Message'),
-                        'name' => 'GROUPPRICETEXT_MESSAGE',
-                        'required' => true,
-                        'desc' => $this->l('Text to display for the selected customer group'),
-                        'cols' => 60,
-                        'rows' => 5
                     ]
                 ],
                 'submit' => [
@@ -158,7 +143,6 @@ class GroupPriceText extends Module
         $helper->submit_action = 'submit' . $this->name;
 
         $helper->fields_value['GROUPPRICETEXT_GROUP_ID'] = Configuration::get('GROUPPRICETEXT_GROUP_ID');
-        $helper->fields_value['GROUPPRICETEXT_MESSAGE'] = Configuration::get('GROUPPRICETEXT_MESSAGE');
         $helper->fields_value['GROUPPRICETEXT_ENABLED'] = Configuration::get('GROUPPRICETEXT_ENABLED');
 
         return $helper->generateForm([$fieldsForm]);
@@ -225,7 +209,7 @@ class GroupPriceText extends Module
             $regularPrice = Tools::displayPrice($priceIncl);
         } else {
             // Get the message
-            $message = Configuration::get('GROUPPRICETEXT_MESSAGE');
+            $message = $this->l('Special pricing for your group!');
         }
 
         // Assign variables to template
