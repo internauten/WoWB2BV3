@@ -25,3 +25,6 @@ A PrestaShop module that displays custom text on product pages for customers bel
 
 See README.md for installation instruction
 
+## v1.0.1
+
+All Texts to the translation files
